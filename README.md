@@ -9,7 +9,7 @@ request
 ```
 ## 拉取代码
 ```json
-ql raw https://gh.y4cc.cc/gh/10010v4/10010.js
+ql raw https://gh.y4cc.cc/gh/https://raw.githubusercontent.com/xxcyou/LianTonQD/main/LianTonQD.js
 0 0 0 * * ?
 ```
 1.支持多账号签到
