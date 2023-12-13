@@ -8,6 +8,32 @@ const fs = require('fs')
 const request = require("request");
 const ucd = process.cwd()
 const filePath = path.resolve(ucd);
+const QueryRedEnvelope = (cookie) => new Promise ((resolve, reject) => {
+    let opts = {
+        url: "https://act.10010.com/SigninApp/convert/getTelephone",
+        method: "POST",
+        headers: {
+            'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
+            'Content-Type': 'application/json',
+            cookie
+        }
+    };
+    request(opts, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            let ret = JSON.parse(body)
+            let status = ret.status
+            if (status === '0000'){
+                console.log(`[簽到積分] 当前 ${ret.data['telephone']} 话费红包`)
+                resolve(ret.data['telephone']);
+            }else {
+                console.log("QueryRedEnvelope")
+                reject(ret)
+            }
+        } else {
+            reject(error)
+        }
+    });
+})
 const QueryPoints = (cookie) => new Promise ((resolve, reject) => {
     let opts = {
         url: "https://act.10010.com/SigninApp/signin/getIntegral",
@@ -100,7 +126,8 @@ const signin = (cookie) => new Promise ((resolve, reject) => {
         .then((points) => IFsignin(cookie))
         .then((m) => Ksignin(cookie))
         .then((m) => QueryPoints(cookie))
-        .then((s) => resolve(s))
+        .then((m) => QueryRedEnvelope(cookie))
+        .then((s) => resolve('ARE YOU OK ???'))
         .catch((err) => reject(err))
 })
 const main = (filePath) => {
