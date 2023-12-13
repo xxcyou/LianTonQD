@@ -9,6 +9,8 @@ request
 ```
 ## 拉取代码
 ```json
+ql raw https://gh.xxcyou.com/gh/raw.githubusercontent.com/xxcyou/LianTonQD/main/LianTonQD.js
+分流库(两个随便一个都可以)
 ql raw https://gh.y4cc.cc/gh/https://raw.githubusercontent.com/xxcyou/LianTonQD/main/LianTonQD.js
 0 0 0 * * ?
 ```
